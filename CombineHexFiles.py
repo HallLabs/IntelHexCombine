@@ -225,12 +225,17 @@ else:
 			print("\n\nAdding Hex file \"" + arg + "\"")
 			hexFile.OpenHexFile(arg);
 	
-	hexFile.BluetoothModifications();
+	# hexFile.BluetoothModifications();
 	
 	ranges = hexFile.GetAddressRanges();
 	print("Final Address Ranges:");
 	for current in ranges:
 		print("\t0x%08X-0x%08X [%u bytes]" % (current.start, current.end, current.size));
+		if (current.size <= 16):
+			sys.stdout.write("\t\t[");
+			for bIndex in range(current.size):
+				sys.stdout.write("%02X" % hexFile.binaryImage[current.start + bIndex]);
+			print("]");
 	
 	outputFileName = sys.argv[numArgs-1];
 	print("Outputting File: \"" + outputFileName + "\"");
