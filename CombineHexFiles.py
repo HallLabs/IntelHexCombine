@@ -101,14 +101,14 @@ class HexFile(object):
 								
 								if (valueAddr in self.binaryImage):
 									print("!!!!!!!! Conflict at 0x%08X !!!!!!!!" % valueAddr);
-								else:
-									# print("[0x%08X] = 0x%02X" % (valueAddr, value))
-									self.binaryImage[valueAddr] = value;
-									if (self.filledMin == False or valueAddr < self.minAddress):
-										self.minAddress = valueAddr;
-										self.filledMin = True;
-									if (valueAddr >= self.maxAddress):
-										self.maxAddress = valueAddr+1;
+								
+								# print("[0x%08X] = 0x%02X" % (valueAddr, value))
+								self.binaryImage[valueAddr] = value;
+								if (self.filledMin == False or valueAddr < self.minAddress):
+									self.minAddress = valueAddr;
+									self.filledMin = True;
+								if (valueAddr >= self.maxAddress):
+									self.maxAddress = valueAddr+1;
 						else:
 							print("Data length didn't match actual data string.");
 							print(str(len(dataStr)/2) + " != " + str(numBytes));
